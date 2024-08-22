@@ -1,0 +1,13 @@
+RewriteEngine On
+RewriteBase /
+
+RewriteCond %{REQUEST_URI} !^/dist/css/.*$
+RewriteCond %{REQUEST_URI} !^/dist/js/.*$
+RewriteCond %{REQUEST_URI} !^/dist/images/.*$
+RewriteCond %{REQUEST_URI} !^/robots.txt
+RewriteCond %{REQUEST_URI} !^/dist/
+
+RewriteRule ^(.*)$ /dist/index.html [L,QSA]
+
+ErrorDocument 404 /dist/index.html
+ErrorDocument 403 /dist/index.html

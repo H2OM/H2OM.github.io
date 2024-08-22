@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "target": "es2016",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "allowImportingTsExtensions": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
+    "removeComments": true,
+    "allowJs": true,
+    "checkJs": true,
+    "types": ["react", "react-dom"]
+  },
+  "include": ["src/**/*.tsx"],
+  "exclude": ["node_modules"]
+}
