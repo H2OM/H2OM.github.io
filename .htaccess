@@ -7,7 +7,7 @@ RewriteCond %{REQUEST_URI} !^/dist/images/.*$
 RewriteCond %{REQUEST_URI} !^/robots.txt
 RewriteCond %{REQUEST_URI} !^/dist/
 
-RewriteRule ^(.*)$ /dist/index.html [L,QSA]
+RewriteRule ^(.*)$ /dist/index.php [L,QSA]
 
-ErrorDocument 404 /dist/index.html
-ErrorDocument 403 /dist/index.html
+ErrorDocument 404 /dist/index.php
+ErrorDocument 403 /dist/index.php
