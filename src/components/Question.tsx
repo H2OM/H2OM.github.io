@@ -43,11 +43,14 @@ export default function Question({
 
             return;
         }
-        //Простое сохрание ответа пользователя (С PHP)
+
+        // Простое сохрание ответа пользователя (С PHP)
         // fetch('/', {
         //     method: 'POST',
         //     body: formData
         // }).then(() => nextQuestion(String(formData.getAll('answer[]').join(', '))));
+
+        nextQuestion(String(formData.getAll('answer[]').join(', ')));
     };
 
     useEffect(() => {
