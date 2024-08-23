@@ -22,7 +22,7 @@ export default function Index() {
     };
 
     useEffect(() => {
-        fetch('https://opentdb.com/api.php?amount=10&category=22')
+        fetch('https://opentdb.com/api.php?amount=1&category=22')
             .then(response => {
                 if (!response.ok) {
                     setApiData(false);
@@ -47,16 +47,22 @@ export default function Index() {
     }
 
     return (
-        currentQuestion < apiData.length
-            ? <Question
-                difficulty={apiData[currentQuestion].difficulty}
-                question={apiData[currentQuestion].question}
-                category={apiData[currentQuestion].category}
-                type={apiData[currentQuestion].type}
-                correctAnswer={apiData[currentQuestion].correct_answer}
-                incorrectAnswers={apiData[currentQuestion].incorrect_answers}
-                nextQuestion={nextQuestion}
-            />
-            : <Result questions={apiData} answers={answers} />
+        <section className={"container"}>
+            <div className={"section"}>
+                {
+                    currentQuestion < apiData.length
+                        ? <Question
+                            difficulty={apiData[currentQuestion].difficulty}
+                            question={apiData[currentQuestion].question}
+                            category={apiData[currentQuestion].category}
+                            type={apiData[currentQuestion].type}
+                            correctAnswer={apiData[currentQuestion].correct_answer}
+                            incorrectAnswers={apiData[currentQuestion].incorrect_answers}
+                            nextQuestion={nextQuestion}
+                        />
+                        : <Result questions={apiData} answers={answers}/>
+                }
+            </div>
+        </section>
     )
 }

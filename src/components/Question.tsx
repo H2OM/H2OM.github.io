@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 
 interface QuestionProps {
     difficulty: string;
@@ -21,6 +21,16 @@ export default function Question({
                                  }: QuestionProps) {
     const [warning, setWarning] = useState<boolean>(false);
 
+    const shuffledAnswers = useMemo(() => {
+        const array = [...incorrectAnswers, correctAnswer];
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+
+        return array;
+    }, [incorrectAnswers, correctAnswer]);
+
     const submitHandler = (e: any): void => {
         e.preventDefault();
 
@@ -28,7 +38,9 @@ export default function Question({
         formData.set('question', question);
         formData.set('category', category);
 
-        if (!formData.has('answer')) {
+        if (!formData.has('answer[]')) {
+            setWarning(true);
+
             return;
         }
 
@@ -38,42 +50,38 @@ export default function Question({
             body: formData
         }).then(() => nextQuestion(String(formData.get('answer'))));
     };
-    const shuffle = (array: any[]): any[] => {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
+
+    useEffect(() => {
+        if (warning) {
+            setTimeout(() => setWarning(false), 200);
         }
-
-        return array;
-    };
-
-    useEffect(()=>{
-
-        setTimeout(()=> setWarning(false), 200);
-
     }, [warning]);
 
     return (
         <div className={"question"}>
-            <div className={"question__header"}>
-                <div className={"question__header__difficulty"}>{difficulty}</div>
-                <h2 className="title">{question}</h2>
-            </div>
+            <h2 className={"title question__difficulty _" + difficulty} data-dif={difficulty}>{question}</h2>
             <h3 className={"sub-title"}>{category}</h3>
             <form className="question__body" onSubmit={submitHandler}>
                 {
-                    shuffle([...incorrectAnswers, correctAnswer]).map(each => {
-                        return <input
-                            type={type === 'multiple' ? 'checkbox' : 'radio'}
-                            className={"question__body__input"}
-                            name={"answer"}
-                            value={each}
-                            key={each}
-                            required={true}
-                        />
+                    shuffledAnswers.map(each => {
+                        return (
+                            <label className={"question__body__label"} key={each}>
+                                <input
+                                    type={type === 'multiple' ? 'checkbox' : 'radio'}
+                                    className={"question__body__input"}
+                                    name={"answer[]"}
+                                    value={each}
+                                />
+                                {each}
+                            </label>
+                        )
                     })
                 }
-                <button className={"question__body__submit" + warning ? "_shake" : ""} type={'submit'} disabled={warning}>
+                <button
+                    className={"question__body__label " + (warning ? "_shake" : "")}
+                    type={'submit'}
+                    disabled={warning}
+                >
                     Подтвердить
                 </button>
             </form>

@@ -4,7 +4,7 @@
         $answers = json_decode(file_get_contents(__DIR__ . '/assets/answers.json'), true);
 
         $answers[$clientIP][] = [
-            'answer' => htmlspecialchars(trim($_POST['answer'])),
+            'answer' => explode(',', htmlspecialchars(trim(implode(',', $_POST['answer'])))),
             'category' => htmlspecialchars(trim($_POST['category'])),
             'question' => htmlspecialchars(trim($_POST['question']))
         ];
