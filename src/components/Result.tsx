@@ -4,7 +4,7 @@ import {API_DATA} from "../routes/Index";
 export default function Result({questions, answers}: { questions: API_DATA[], answers: string[] }) {
     const sortedList: API_DATA[] = questions.sort((a: API_DATA, b: API_DATA) => {
         const left = a.difficulty === 'easy' ? 1 : a.difficulty === 'medium' ? 2 : 3;
-        const right = a.difficulty === 'easy' ? 1 : a.difficulty === 'medium' ? 2 : 3;
+        const right = b.difficulty === 'easy' ? 1 : b.difficulty === 'medium' ? 2 : 3;
 
         if (left > right) {
             return 1;
