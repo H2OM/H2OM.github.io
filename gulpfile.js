@@ -6,8 +6,8 @@ const cleanCSS = require('gulp-clean-css');
 const filenames = require('gulp-filenames');
 const browserSync = require('browser-sync').create();
 const fs = require('fs');
-const dist = "./Dist";
-const build = (process.argv.findIndex((val) => val === "--dev") != "-1" ? "./build" : "");
+const dist = "./dist";
+const build = (process.argv.findIndex((val) => val === "--dev") != "-1" ? "./dist" : "");
 gulp.task('server', function () {
     browserSync.init({
         proxy: "http://sber-test",

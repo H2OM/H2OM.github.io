@@ -8,7 +8,7 @@
     "build": "gulp --dev",
     "test": "echo \"Error: no test specified\" && exit 1",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dest"
+    "deploy": "gh-pages -d dist"
   },
   "tscheck": "tsc",
   "author": "",
