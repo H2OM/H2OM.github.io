@@ -13,8 +13,13 @@
     "removeComments": true,
     "allowJs": true,
     "checkJs": true,
-    "types": ["react", "react-dom"]
+    "types": ["react", "react-dom", "jest"],
+    "paths": {
+      "@/components/*": ["src/components/*"],
+      "@/routes/*": ["src/routes/*"],
+      "@/src/*": ["src/*"]
+    }
   },
-  "include": ["src/**/*.tsx"],
+  "include": ["src/**/*.tsx", "__tests__/**/*.tsx"],
   "exclude": ["node_modules"]
 }
