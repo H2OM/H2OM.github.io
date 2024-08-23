@@ -8,7 +8,6 @@ export default function Router() {
         {
             path: "/",
             element: <Index/>,
-            loader: API,
             errorElement: <NotFound/>,
         }
     ]);
