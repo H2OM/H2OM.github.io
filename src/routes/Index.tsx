@@ -22,7 +22,7 @@ export default function Index() {
     };
 
     useEffect(() => {
-        fetch('https://opentdb.com/api.php?amount=1&category=22')
+        fetch('https://opentdb.com/api.php?amount=10&category=22')
             .then(response => {
                 if (!response.ok) {
                     setApiData(false);
@@ -30,20 +30,33 @@ export default function Index() {
 
                 return response.json();
             }).then(data => {
-            if (data.results !== undefined) {
-                setApiData(data.results);
-            } else {
+                if (data.results !== undefined) {
+                    setApiData(data.results);
+                } else {
 
-                setApiData(false);
-            }
+                    setApiData(false);
+                }
         }).catch(() => setApiData(false));
     }, []);
 
     if (apiData === 'loading') {
-        return <div>Загрузка</div>
+        return (
+            <section className={"container"}>
+                <div className={"section _center"} style={{textAlign: 'center'}}>
+                    <div>Загрузка</div>
+                </div>
+            </section>
+        )
     }
+
     if (!apiData || !Array.isArray(apiData) || apiData.length === 0) {
-        return <div>Не удалось загрузить данные</div>
+        return (
+            <section className={"container"}>
+                <div className={"section  _center"} style={{textAlign: 'center'}}>
+                    <div>Не удалось загрузить данные</div>
+                </div>
+            </section>
+        )
     }
 
     return (

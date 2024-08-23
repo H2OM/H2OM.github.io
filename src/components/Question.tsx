@@ -43,12 +43,11 @@ export default function Question({
 
             return;
         }
-
         //Простое сохрание ответа пользователя
         fetch('/', {
             method: 'POST',
             body: formData
-        }).then(() => nextQuestion(String(formData.get('answer'))));
+        }).then(() => nextQuestion(String(formData.getAll('answer[]').join(', '))));
     };
 
     useEffect(() => {
@@ -61,7 +60,7 @@ export default function Question({
         <div className={"question"}>
             <h2 className={"title question__difficulty _" + difficulty} data-dif={difficulty}>{question}</h2>
             <h3 className={"sub-title"}>{category}</h3>
-            <form className="question__body" onSubmit={submitHandler}>
+            <form className="question__body body" onSubmit={submitHandler}>
                 {
                     shuffledAnswers.map(each => {
                         return (
